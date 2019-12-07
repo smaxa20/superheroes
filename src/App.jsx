@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.jpg';
+import logo from './assets/logo.jpg';
 import { Search } from './Search';
 import * as Styled from './styled';
 
