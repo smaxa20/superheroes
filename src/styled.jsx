@@ -4,7 +4,7 @@ export const Header = styled.div`
     font-family: serif;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: ${props => props.showLogo ? "center" : "flex-start"};
     align-items: center;
     min-height: 100vh;
     min-width: 100vw;
@@ -17,7 +17,7 @@ export const Data = styled.div`
     margin-top: 8px;
 `;
 
-export const DataRow = styled.p`
+export const DataRow = styled.span`
     margin-top: 0px;
     margin-bottom: 24px;
 `;
