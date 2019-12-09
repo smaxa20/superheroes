@@ -10,16 +10,43 @@ export const Header = styled.div`
     min-width: 100vw;
 `;
 
+export const Result = styled.div`
+    overflow: scroll;
+    font-family: serif;
+    color: white;
+    margin-top: 16px;
+    padding: 16px;
+    border: solid red 2px;
+`;
+
 export const Data = styled.div`
     overflow: scroll;
     font-family: serif;
     color: white;
-    margin-top: 8px;
+    :not(:last-child) {
+        margin-bottom: 16px;
+    }
 `;
 
-export const DataRow = styled.span`
+export const DataValue = styled.span`
     margin-top: 0px;
     margin-bottom: 24px;
+    font-size: 16px;
+`;
+
+export const DataLabel = styled.span`
+    margin-top: 0px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    text-transform: capitalize;
+`;
+
+export const DataSection = styled.span`
+    margin-top: 0px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    text-decoration: underline;
+    text-transform: capitalize;
 `;
 
 export const Search = styled.div`

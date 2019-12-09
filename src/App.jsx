@@ -40,26 +40,34 @@ function App() {
 					Object.keys(data).map(key => (
 						key === "results" &&
 							Object.keys(data[key]).map(foo => (
-								Object.keys(data[key][foo]).map(label => (
-									<div>
-										<br />
-										{typeof(data[key][foo][label]) === "object" &&
-										<Styled.DataRow>{label}</Styled.DataRow>}
-										<Styled.DataRow>
-											{typeof(data[key][foo][label]) === "object" ? 
-												Object.keys(data[key][foo][label]).map(max => (
-													<div>
-														<Styled.DataRow>{max} : </Styled.DataRow>
-														<Styled.DataRow>{JSON.stringify(data[key][foo][label][max])}</Styled.DataRow>
-													</div>
-											))
-											: <div>
-											<Styled.DataRow>{label} : </Styled.DataRow>
-											<Styled.DataRow>{JSON.stringify(data[key][foo][label])}</Styled.DataRow>
-										</div>}
-										</Styled.DataRow>
-									</div>
-								))							
+								<Styled.Result>
+									{Object.keys(data[key][foo]).map(label => (
+										<Styled.Data>
+											{typeof(data[key][foo][label]) === "object" && label !== "image" &&
+												<Styled.DataSection>{label}</Styled.DataSection>}
+											<Styled.DataValue>
+												{typeof(data[key][foo][label]) === "object" ? 
+													Object.keys(data[key][foo][label]).map(max => (
+														label === "image" ?
+															<img src={data[key][foo][label][max]} alt="this character" />
+														:
+															<div>
+																<Styled.DataLabel>{max}: </Styled.DataLabel>
+																{typeof(data[key][foo][label][max]) === "object" ?
+																	Object.keys(data[key][foo][label][max]).map(min => (
+																		<Styled.DataValue>{JSON.stringify(data[key][foo][label][max][min])}</Styled.DataValue>
+																	)) :
+																	<Styled.DataValue>{JSON.stringify(data[key][foo][label][max])}</Styled.DataValue>}
+															</div>
+													)) : label !== "id" &&
+														<div>
+															<Styled.DataLabel>{label}: </Styled.DataLabel>
+															<Styled.DataValue>{JSON.stringify(data[key][foo][label])}</Styled.DataValue>
+														</div>}
+											</Styled.DataValue>
+										</Styled.Data>
+									))}
+								</Styled.Result>						
 							))
 						)
 					)
