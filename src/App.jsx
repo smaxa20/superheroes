@@ -39,35 +39,35 @@ function App() {
 				{data !== "Loading..." ?
 					Object.keys(data).map(key => (
 						key === "results" &&
-							Object.keys(data[key]).map(foo => (
+							Object.keys(data[key]).map(result => (
 								<Styled.Result>
-									{Object.keys(data[key][foo]).map(label => (
+									{Object.keys(data[key][result]).map(sectionOrLabel => (
 										<Styled.Data>
-											{typeof(data[key][foo][label]) === "object" && label !== "image" &&
-												<Styled.DataSection>{label}</Styled.DataSection>}
+											{typeof(data[key][result][sectionOrLabel]) === "object" && sectionOrLabel !== "image" &&
+												<Styled.DataSection>{sectionOrLabel}</Styled.DataSection>}
 											<Styled.DataValue>
-												{typeof(data[key][foo][label]) === "object" ? 
-													Object.keys(data[key][foo][label]).map(max => (
-														label === "image" ?
-															<img src={data[key][foo][label][max]} alt="this character" />
+												{typeof(data[key][result][sectionOrLabel]) === "object" ? 
+													Object.keys(data[key][result][sectionOrLabel]).map(labelOrValue => (
+														sectionOrLabel === "image" ?
+															<img src={data[key][result][sectionOrLabel][labelOrValue]} alt="this character" />
 														:
 															<div>
-																<Styled.DataLabel>{max}: </Styled.DataLabel>
-																{typeof(data[key][foo][label][max]) === "object" ?
-																	Object.keys(data[key][foo][label][max]).map(min => (
-																		<Styled.DataValue>{JSON.stringify(data[key][foo][label][max][min])}</Styled.DataValue>
+																<Styled.DataLabel>{labelOrValue}: </Styled.DataLabel>
+																{typeof(data[key][result][sectionOrLabel][labelOrValue]) === "object" ?
+																	Object.keys(data[key][result][sectionOrLabel][labelOrValue]).map(value => (
+																		<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel][labelOrValue][value])}</Styled.DataValue>
 																	)) :
-																	<Styled.DataValue>{JSON.stringify(data[key][foo][label][max])}</Styled.DataValue>}
+																	<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel][labelOrValue])}</Styled.DataValue>}
 															</div>
-													)) : label !== "id" &&
+													)) : sectionOrLabel !== "id" &&
 														<div>
-															<Styled.DataLabel>{label}: </Styled.DataLabel>
-															<Styled.DataValue>{JSON.stringify(data[key][foo][label])}</Styled.DataValue>
+															<Styled.DataLabel>{sectionOrLabel}: </Styled.DataLabel>
+															<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel])}</Styled.DataValue>
 														</div>}
 											</Styled.DataValue>
 										</Styled.Data>
 									))}
-								</Styled.Result>						
+								</Styled.Result>	
 							))
 						)
 					)
