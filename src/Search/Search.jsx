@@ -3,7 +3,7 @@ import * as Styled from '../styled';
 
 export function Search({ data, ...searchProps }) {
     return (
-        <Styled.Data searchProps={searchProps} className="test2">
+        <Styled.Data searchProps={searchProps}>
 				{data !== "Loading..." ?
 					Object.keys(data).map(key => (
 						key === "results" &&
