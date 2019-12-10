@@ -16,7 +16,9 @@ export const Result = styled.div`
     color: white;
     margin-top: 16px;
     padding: 16px;
-    border: solid red 2px;
+    border: solid #191919 2px;
+    border-radius: 3px;
+    background: #333333;
 `;
 
 export const Data = styled.div`
