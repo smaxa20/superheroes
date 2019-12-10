@@ -14,7 +14,9 @@ export const Result = styled.div`
     overflow: scroll;
     font-family: serif;
     color: white;
-    margin-top: 16px;
+	:not(:last-child) {
+        margin-bottom: 16px;
+    }
     padding: 16px;
     border: solid #191919 2px;
     border-radius: 3px;
@@ -26,15 +28,25 @@ export const Compare = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+	margin-top: 16px;
 `;
 
 export const Data = styled.div`
-    overflow: scroll;
     font-family: serif;
     color: white;
+	width: 90%;
     :not(:last-child) {
         margin-bottom: 16px;
     }
+`;
+
+export const Column = styled.div`
+	height: 83vh;
+	width: 45%;
+	overflow: scroll;
+	${Data} {
+		width: 100%;
+	}
 `;
 
 export const DataValue = styled.span`
