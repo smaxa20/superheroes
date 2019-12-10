@@ -2,14 +2,17 @@
   "name": "marvel-encyclopedia",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
