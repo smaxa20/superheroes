@@ -1,78 +1,85 @@
 import React, { useState } from 'react';
 import logo from './assets/logo.jpg';
-import { Search } from './Search';
+import { Search } from './Search/Search';
+import { SearchBar } from './Search/SearchBar';
+import { Compare } from './Compare/Compare';
+import { CompareBar } from './Compare/CompareBar';
 import * as Styled from './styled';
 
 
 function App() {
 	const [search, setSearch] = useState("Ironman");
-	const [data, setData] = useState([]);
-	const [showLogo, setShowLogo] = useState(true);
+	const [searchData, setSearchData] = useState([]);
 
-	const APICall = () => {
+	const [compare1, setCompare1] = useState("Batman");
+	const [compare2, setCompare2] = useState("Superman");
+	const [compareData1, setCompareData1] = useState([]);
+	const [compareData2, setCompareData2] = useState([]);
+
+	const [showLogo, setShowLogo] = useState(true);
+	const [isCompare, setIsCompare] = useState(false);
+
+	const APISearch = () => {
 		fetch(
 			`https://superheroapi.com/api.php/1711939795607990/search/${search}`,
 		)
 		.then(response => response.json())
-		.then(data => setData(data))
+		.then(data => setSearchData(data))
 		.catch(error => console.log(error));
-		setData("Loading...")
+		setSearchData("Loading...");
 		setShowLogo(false);
+		setIsCompare(false);
+	};
+
+	const APICompare = () => {
+		fetch(
+			`https://superheroapi.com/api.php/1711939795607990/search/${compare1}`,
+		)
+		.then(response => response.json())
+		.then(data => setCompareData1(data))
+		.catch(error => console.log(error));
+
+		fetch(
+			`https://superheroapi.com/api.php/1711939795607990/search/${compare2}`,
+		)
+		.then(response => response.json())
+		.then(data => setCompareData2(data))
+		.catch(error => console.log(error));
+
+		setCompareData1("Loading...");
+		setCompareData2("Loading...");
+		setShowLogo(false);
+		setIsCompare(true);
 	};
 
 	const clear = () => {
-		setData([]);
+		setSearchData([]);
+		setCompareData1([]);
+		setCompareData2([]);
 		setShowLogo(true);
-	}
+	};
 
 	return (
-		<Styled.Header showLogo={showLogo}>
+		<Styled.Header>
 			{showLogo && <Styled.Logo src={logo} alt="Marvel logo" />}
-			<Search 
-				onClick={() => APICall()}
+			<SearchBar 
+				onClick={() => APISearch()}
 				onClear={() => clear()}
 				onChange={event => setSearch(event.target.value)}
-				label="Search for someone in the Marvel or DC Universes:"
+				label="Search for a character in the Marvel or DC Universes:"
 				placeholder="Ironman"
 			/>
-			<Styled.Data>
-				{data !== "Loading..." ?
-					Object.keys(data).map(key => (
-						key === "results" &&
-							Object.keys(data[key]).map(result => (
-								<Styled.Result>
-									{Object.keys(data[key][result]).map(sectionOrLabel => (
-										<Styled.Data>
-											{typeof(data[key][result][sectionOrLabel]) === "object" && sectionOrLabel !== "image" &&
-												<Styled.DataSection>{sectionOrLabel}</Styled.DataSection>}
-											<Styled.DataValue>
-												{typeof(data[key][result][sectionOrLabel]) === "object" ? 
-													Object.keys(data[key][result][sectionOrLabel]).map(labelOrValue => (
-														sectionOrLabel === "image" ?
-															<img src={data[key][result][sectionOrLabel][labelOrValue]} alt="this character" />
-														:
-															<div>
-																<Styled.DataLabel>{labelOrValue}: </Styled.DataLabel>
-																{typeof(data[key][result][sectionOrLabel][labelOrValue]) === "object" ?
-																	Object.keys(data[key][result][sectionOrLabel][labelOrValue]).map(value => (
-																		<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel][labelOrValue][value])}</Styled.DataValue>
-																	)) :
-																	<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel][labelOrValue])}</Styled.DataValue>}
-															</div>
-													)) : sectionOrLabel !== "id" &&
-														<div>
-															<Styled.DataLabel>{sectionOrLabel}: </Styled.DataLabel>
-															<Styled.DataValue>{JSON.stringify(data[key][result][sectionOrLabel])}</Styled.DataValue>
-														</div>}
-											</Styled.DataValue>
-										</Styled.Data>
-									))}
-								</Styled.Result>	
-							))
-						)
-					)
-				: "Loading..."}
-			</Styled.Data>
+			<CompareBar 
+				onClick={() => APICompare()}
+				onClear={() => clear()}
+				onChange1={event => setCompare1(event.target.value)}
+				onChange2={event => setCompare2(event.target.value)}
+				labelLeft="Compare two characters:"
+				labelBetween="and"
+				placeholder1="Batman"
+				placeholder2="Superman"
+			/>
+			{isCompare ? <Compare data1={compareData1} data2={compareData2} /> : <Search data={searchData} />}
 		</Styled.Header>
 	);
 }

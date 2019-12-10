@@ -1,7 +1,7 @@
 import React from 'react';
-import * as Styled from './styled';
+import * as Styled from '../styled';
 
-export function Search({
+export function SearchBar({
     onClick,
     onClear,
     onChange,

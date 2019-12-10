@@ -21,6 +21,13 @@ export const Result = styled.div`
     background: #333333;
 `;
 
+export const Compare = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+`;
+
 export const Data = styled.div`
     overflow: scroll;
     font-family: serif;
@@ -76,6 +83,22 @@ export const Input = styled.input`
     padding-left: 4px;
     padding-right: 4px;
     margin-left: 4px;
+    background: black;
+    color: white;
+    &:focus {
+        outline: 0;
+    }
+`;
+
+export const Input2 = styled.input`
+    font-family: inherit;
+    font-size: 24px;
+    border: 1px solid #f0131e;
+    border-radius: 3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
     background: black;
     color: white;
     &:focus {
