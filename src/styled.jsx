@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+// Styled Components is a library that allows you to more easily write CSS without having to use classes
+// Instead you create React components and use them by tag (e.g. this first component would be used <Styled.Header>stuff</Styled.Header>)
+
+// Because you're creating components not using classes, Styled Components allows you to pass props and add CSS rules based on those props
+// You can see an example of this in the Header component's justify-content rule 
+// - if the showLogo that was passed in evaluates to true, we want to justify the content to the center, if it's false we want to justify the content to the start
+
 export const Header = styled.div`
     font-family: serif;
     display: flex;
@@ -10,6 +17,8 @@ export const Header = styled.div`
     min-width: 100vw;
 `;
 
+// Styled Components also supports nested rules such as the one seen here
+// Every child of Result except the last one will have a margin-bottom of 16px
 export const Result = styled.div`
     overflow: scroll;
     font-family: serif;
@@ -46,6 +55,8 @@ export const Data = styled.div`
     }
 `;
 
+// Another way to nest rules is to explicitly specify another component as a child as seen here
+// This says that if a Data component is the direct child of a Column component, that Data component will have a width of 100%
 export const Column = styled.div`
 	height: 83vh;
 	width: 45%;

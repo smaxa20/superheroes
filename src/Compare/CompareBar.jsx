@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Styled from '../styled';
 
+// React allows us to pull out and modularize components such as this by having their parents pass props to them
+// Doing this allows us to have multiple of these CompareBar components with different values and functionality
 export function CompareBar({
     onClick,
     onClear,
