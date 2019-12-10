@@ -152,3 +152,26 @@ export const ClearButton = styled.button`
         border-color: #036bd9;
     }
 `;
+
+export const TweetContainer = styled.div`
+	display: flex;
+	justify-content: flex-end;
+`;
+
+export const TweetButton = styled.button`
+	background-color: #00aced;
+    color: white;
+    font-size: 24px;
+    font-family: inherit;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid #00aced;
+    cursor: pointer;
+    &:focus {
+        outline: 0;
+    }
+    &:active {
+        background-color: #0084b4;
+        border-color: #0084b4;
+    }
+`;

@@ -52,6 +52,10 @@ function App() {
 		setIsCompare(true);
 	};
 
+	const onTweet = (data) => {
+		console.log(data);
+	}
+
 	const clear = () => {
 		setSearchData([]);
 		setCompareData1([]);
@@ -79,7 +83,9 @@ function App() {
 				placeholder1="Batman"
 				placeholder2="Superman"
 			/>
-			{isCompare ? <Compare data1={compareData1} data2={compareData2} /> : <Search data={searchData} />}
+			{isCompare ? 
+				<Compare data1={compareData1} data2={compareData2} onTweet={onTweet} />
+				: <Search data={searchData} onTweet={onTweet} />}
 		</Styled.Header>
 	);
 }
