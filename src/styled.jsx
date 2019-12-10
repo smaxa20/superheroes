@@ -28,7 +28,13 @@ export const Compare = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-	margin-top: 16px;
+`;
+
+export const Search = styled.div`
+    margin-top: 16px;
+    width: ${props => props.compare ? "100%" : "90%"};
+    font-family: serif;
+    color: white;
 `;
 
 export const Data = styled.div`
@@ -70,7 +76,7 @@ export const DataSection = styled.span`
     text-transform: capitalize;
 `;
 
-export const Search = styled.div`
+export const SearchBar = styled.div`
     display: flex;
     align-items: center;
     height: 32px;

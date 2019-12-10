@@ -2,10 +2,10 @@ import React from 'react';
 import { Result } from './Result';
 import * as Styled from '../styled';
 
-export function Search({ data, onTweet, ...searchProps }) {
+export function Search({ data, onTweet, compare, ...searchProps }) {
 
     return (
-        <Styled.Data searchProps={searchProps}>
+        <Styled.Search compare={compare} searchProps={searchProps}>
 			{data !== "Loading..." ?
 				Object.keys(data).map(key => (
 					key === "results" &&
@@ -15,6 +15,6 @@ export function Search({ data, onTweet, ...searchProps }) {
 					)
 				)
 			: "Loading..."}
-		</Styled.Data>
+		</Styled.Search>
     )
 }

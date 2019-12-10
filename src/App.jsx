@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './assets/logo.jpg';
 import { Search } from './Search/Search';
 import { SearchBar } from './Search/SearchBar';
@@ -18,6 +18,24 @@ function App() {
 
 	const [showLogo, setShowLogo] = useState(true);
 	const [isCompare, setIsCompare] = useState(false);
+	const [compareFocus, setCompareFocus] = useState(false);
+
+	useEffect(() => {
+		document.addEventListener("keyup", onEnterPress, false);
+		return function cleanup() {
+			document.removeEventListener("keyup", onEnterPress, false);
+		};
+	});
+
+	const onEnterPress = (event) => {
+		if (event.keyCode === 13) {
+			if (compareFocus) {
+				APICompare();
+			} else {
+				APISearch();
+			}
+		}
+	}
 
 	const APISearch = () => {
 		fetch(
@@ -63,21 +81,31 @@ function App() {
 		setShowLogo(true);
 	};
 
+	const onSearchFocus = () => {
+		setCompareFocus(false);
+	};
+
+	const onCompareFocus = () => {
+		setCompareFocus(true);
+	};
+
 	return (
 		<Styled.Header>
 			{showLogo && <Styled.Logo src={logo} alt="Marvel logo" />}
-			<SearchBar 
+			<SearchBar
 				onClick={() => APISearch()}
 				onClear={() => clear()}
-				onChange={event => setSearch(event.target.value)}
+				onChange={event => setSearch(event.target.value === "" ? "Ironman" : event.target.value)}
+				onFocus={() => onSearchFocus()}
 				label="Search for a character in the Marvel or DC Universes:"
 				placeholder="Ironman"
 			/>
 			<CompareBar 
 				onClick={() => APICompare()}
 				onClear={() => clear()}
-				onChange1={event => setCompare1(event.target.value)}
-				onChange2={event => setCompare2(event.target.value)}
+				onChange1={event => setCompare1(event.target.value === "" ? "Batman" : event.target.value)}
+				onChange2={event => setCompare2(event.target.value === "" ? "Superman" : event.target.value)}
+				onFocus={() => onCompareFocus()}
 				labelLeft="Compare two characters:"
 				labelBetween="and"
 				placeholder1="Batman"
@@ -85,7 +113,7 @@ function App() {
 			/>
 			{isCompare ? 
 				<Compare data1={compareData1} data2={compareData2} onTweet={onTweet} />
-				: <Search data={searchData} onTweet={onTweet} />}
+				: <Search data={searchData} onTweet={onTweet} compare={false} />}
 		</Styled.Header>
 	);
 }
